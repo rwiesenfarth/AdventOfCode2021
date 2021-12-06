@@ -6,140 +6,135 @@
 #include <string>
 
 
-static constexpr int s_boardSize = 5;
-
-
-struct BingoEntry
+struct Line
 {
-  bool m_drawn = false;
-  int  m_value = 0;
-
-  explicit BingoEntry( int value )
-    : m_value( value )
-  { }
+  int m_x1 = 0;
+  int m_y1 = 0;
+  int m_x2 = 0;
+  int m_y2 = 0;
 };
 
 
-struct BingoBoard
+struct Grid
 {
-  BingoBoard( std::ifstream &input )
+  Grid( int xSize, int ySize )
+    : m_values( ySize, std::vector<int>( xSize, 0 ) )
+  {}
+
+  void addHorizontalOrVerticalLines( const std::vector<Line> &lines )
   {
-    m_entries.resize( s_boardSize );
-    m_rowHits.resize( s_boardSize, 0 );
-    m_colHits.resize( s_boardSize, 0 );
-    for( auto &row : m_entries )
+    for( const auto &line : lines )
     {
-      for( int col = 0; col < s_boardSize; col++ )
+      if( line.m_x1 == line.m_x2 )
       {
-        int value;
-        input >> value;
-        row.emplace_back( BingoEntry( value ) );
-      }
-    }
-  }
+        int start = std::min( line.m_y1, line.m_y2 );
+        int end   = std::max( line.m_y1, line.m_y2 );
 
-  bool markAndCheckWin( int value )
-  {
-    for( int r = 0; r < s_boardSize; r ++ )
-    {
-      auto &row = m_entries[r];
-
-      for( int c = 0; c < s_boardSize; c++ )
-      {
-        auto &col = row[c];
-
-        if( col.m_value == value )
+        for( int i = start; i <= end; i++ )
         {
-          col.m_drawn = true;
-          m_rowHits[r]++;
-          m_colHits[c]++;
+          m_values[i][line.m_x1]++;
+        }
+      }
+      else if( line.m_y1 == line.m_y2 )
+      {
+        int start = std::min( line.m_x1, line.m_x2 );
+        int end = std::max( line.m_x1, line.m_x2 );
+
+        for( int i = start; i <= end; i++ )
+        {
+          m_values[line.m_y1][i]++;
         }
       }
     }
-    for( int i = 0; i < s_boardSize; i++ )
-    {
-      if( ( m_rowHits[i] == s_boardSize ) || ( m_colHits[i] == s_boardSize ) )
-      {
-        m_hasWon = true;
-        break;
-      }
-    }
-    return m_hasWon;
   }
 
-  int sumUnmarked()
+  void addDiagonalLines( const std::vector<Line> &lines )
   {
-    int sum = 0;
+    for( const auto &line : lines )
+    {
+      if( std::abs( line.m_x1 - line.m_x2 ) == std::abs( line.m_y1 - line.m_y2 ) )
+      {
+        int count = std::abs( line.m_x1 - line.m_x2 );
+        int dx = ( line.m_x1 < line.m_x2 ) ? 1 : -1;
+        int dy = ( line.m_y1 < line.m_y2 ) ? 1 : -1;
 
-    for( const auto &row : m_entries )
+        for( int i = 0; i <= count; i++ )
+        {
+          m_values[line.m_y1 + i * dy][line.m_x1 + i * dx]++;
+        }
+      }
+    }
+  }
+  
+  int countDangerousAreas()
+  {
+    int count = 0;
+
+    for( const auto &row : m_values )
     {
       for( const auto &col : row )
       {
-        if( !col.m_drawn )
+        if( col > 1 )
         {
-          sum += col.m_value;
+          count++;
         }
       }
     }
-    return sum;
+    return count;
   }
 
-  std::vector<std::vector<BingoEntry>> m_entries;
-  std::vector<int>                     m_rowHits;
-  std::vector<int>                     m_colHits;
-  bool                                 m_hasWon = false;
+  std::vector<std::vector<int>> m_values;
 };
 
 
 int main()
 {
-  std::ifstream           input( R"(D:\Develop\AdventOfCode2021\Day04\input.txt)" );
-  std::string             drawnLine;
-  std::vector<int>        drawnValues;
-  std::vector<BingoBoard> boards;
+  std::ifstream     input( R"(D:\Develop\AdventOfCode2021\Day05\input.txt)" );
+  std::vector<Line> lines;
+  std::string       textLine;
+  int               xMax = 0;
+  int               yMax = 0;
 
-  std::getline( input, drawnLine );
-  while( true )
+  while( std::getline( input, textLine ) )
   {
-    drawnValues.push_back( std::stoi( drawnLine ) );
+    Line line;
 
-    auto pos = drawnLine.find( ',' );
-    if( pos == std::string::npos )
+    line.m_x1 = std::stoi( textLine );
+    if( line.m_x1 > xMax )
     {
-      break;
+      xMax = line.m_x1;
     }
-    else
+    textLine = textLine.substr( textLine.find( ',' ) + 1 );
+    line.m_y1 = std::stoi( textLine );
+    if( line.m_y1 > yMax )
     {
-      drawnLine = drawnLine.substr( pos + 1 );
+      yMax = line.m_y1;
     }
+    textLine = textLine.substr( textLine.find( '>' ) + 2 );
+    line.m_x2 = std::stoi( textLine );
+    if( line.m_x2 > xMax )
+    {
+      xMax = line.m_x2;
+    }
+    textLine = textLine.substr( textLine.find( ',' ) + 1 );
+    line.m_y2 = std::stoi( textLine );
+    if( line.m_y2 > yMax )
+    {
+      yMax = line.m_y2;
+    }
+
+    lines.emplace_back( line );
   }
 
-  while( !input.eof() )
-  {
-    boards.emplace_back( BingoBoard( input ) );
-  }
+  Grid grid( xMax + 1, yMax + 1 );
 
-  std::cout << "Read " << drawnValues.size() << " values and " << boards.size() << " boards." << std::endl;
+  grid.addHorizontalOrVerticalLines( lines );
 
-  int  finalScore = 0;
-  bool isFirst    = true;
-  for( auto value : drawnValues )
-  {
-    for( auto &board : boards )
-    {
-      if( !board.m_hasWon && board.markAndCheckWin( value ) )
-      {
-        finalScore = value * board.sumUnmarked();
-        if( isFirst )
-        {
-          std::cout << "Final score of first board won is " << finalScore << std::endl;
-          isFirst = false;
-        }
-      }
-    }
-  }
+  std::cout << "First number of dangerous areas: " << grid.countDangerousAreas() << std::endl;
 
-  std::cout << "Final score of last board won is " << finalScore << std::endl;
+  grid.addDiagonalLines( lines );
+
+  std::cout << "Second number of dangerous areas: " << grid.countDangerousAreas() << std::endl;
 
   return 0;
 }
