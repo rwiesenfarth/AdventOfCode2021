@@ -371,60 +371,6 @@ struct Scanner
     return true;
   }
 
-  //bool estimatePosition( const Scanner &other )
-  //{
-  //  auto hashesOne = beaconDistances();
-  //  auto hashesTwo = other.beaconDistances();
-  //  std::unordered_map<size_t, ExteriorPosition> positions;
-  //  std::unordered_map<size_t, int> counts;
-  //  bool result = false;
-
-  //  for( const auto &[hash, positionPair] : hashesOne )
-  //  {
-  //    //for( auto it = hashesTwo.find( hash ); it != hashesTwo.end(); ++it )
-  //    //{
-  //    //  auto p1 = positionPair.first;
-  //    //  auto p2 = it->second.first;
-
-  //    //  ////auto pos = other.m_position + ExteriorDistance( p2, p1 );
-  //    //  //auto pos = -( other.m_position + ExteriorDistance( p2, p1 ) );
-  //    //  auto pos = -( -other.m_position + ExteriorDistance( p2, p1 ) );
-  //    //  positions[pos.hash()] = pos;
-  //    //  counts[pos.hash()]++;
-  //    //}
-  //    auto it = hashesTwo.find( hash );
-  //    if( it != hashesTwo.end() )
-  //    {
-  //      auto p1 = positionPair.first;
-  //      auto p2 = it->second.first;
-
-  //      ////auto pos = other.m_position + ExteriorDistance( p2, p1 );
-  //      //auto pos = -( other.m_position + ExteriorDistance( p2, p1 ) );
-  //      auto pos = -( -other.m_position + ExteriorDistance( p2, p1 ) );
-  //      positions[pos.hash()] = pos;
-  //      counts[pos.hash()]++;
-  //    }
-  //  }
-  //  int maxCount = 0;
-  //  size_t maxHash = 0;
-  //  for( const auto &[hash, count] : counts )
-  //  {
-  //    //std::cout << "  estimated position " << positions[hash] << " with count " << count << std::endl;
-  //    if( count > maxCount )
-  //    {
-  //      maxCount = count;
-  //      maxHash = hash;
-  //    }
-  //  }
-  //  std::cout << "  final position " << positions[maxHash] << " with count " << maxCount << std::endl;
-  //  if( maxCount > 0 )
-  //  {
-  //    m_position = positions[maxHash];
-  //    result = true;
-  //  }
-  //  return result;
-  //}
-
   void addBeacons( std::unordered_map<std::size_t, ExteriorPosition> &beacons ) const
   {
     if( !m_oriented )
@@ -475,10 +421,6 @@ bool addToNetwork( const Scanner &scannerOne, Scanner &scannerTwo,
     Scanner candidate( scannerTwo );
     candidate.m_orientation = ori;
     auto count = scannerOne.matches( candidate );
-    //if( count > 0 )
-    //{
-    //  std::cout << "orientation " << ori << " results in " << count << " matches" << std::endl;
-    //}
     if( count >= maxCount )
     {
       maxCount = count;
@@ -497,8 +439,6 @@ bool addToNetwork( const Scanner &scannerOne, Scanner &scannerTwo,
   }
 
   //std::cout << "Best candidate is " << bestCandidate << std::endl;
-
-  //if( !bestCandidate.estimatePosition( scannerOne ) )
   if( !positionFound )
   {
     return false;
@@ -559,15 +499,6 @@ bool addToNetwork( const Scanner &scannerOne, Scanner &scannerTwo,
 
 int main()
 {
-  //InteriorPosition testInterior( 2, 4, 8 );
-
-  //for( const auto &ori : Orientation::permutations() )
-  //{
-  //  ExteriorPosition ext( testInterior, ori );
-
-  //  std::cout << ori << " : " << ext << std::endl;
-  //}
-
   std::ifstream input( R"(D:\Develop\AdventOfCode2021\Day19\input.txt)" );
   std::string   textLine;
   std::vector<Scanner> scanners;
@@ -599,16 +530,6 @@ int main()
   scanners[0].m_oriented = true;
   scanners[0].addBeacons( beacons );
 
-  //for( const auto &[_, pos] : beacons )
-  //{
-  //  std::cout << "beacon at " << pos << std::endl;
-  //}
-
-  //for( const auto &scanner : scanners )
-  //{
-  //  std::cout << scanner << std::endl;
-  //}
-
   bool didChanges;
   do
   {
@@ -638,11 +559,6 @@ int main()
   }
   while( didChanges );
 
-  //if( addToNetwork( scanners[0], scanners[1], beacons ) )
-  //{
-  //  std::cout << "Added to network: " << scanners[1] << std::endl;
-  //}
-
   std::cout << "Scanner positions:" << std::endl;
   for( const auto &scanner : scanners )
   {
@@ -664,6 +580,7 @@ int main()
     }
   }
 
+  std::cout << "Total number of beacons is " << beacons.size() << std::endl;
   std::cout << "Maximum manhattan distance is " << maxDist << std::endl;
 
   return 0;
