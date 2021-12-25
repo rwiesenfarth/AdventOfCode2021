@@ -296,8 +296,12 @@ Recalibrating experimental antenna...done.
 Boost strength due to matching signal phase: 1 star
 Only 49 stars to go.
 
-You have enough stars to .
+If you like, you can .
 
-Although it hasn't changed, you can still get your puzzle input.
+Both parts of this puzzle are complete! They provide two gold stars: **
+
+At this point, all that is left is for you to admire your Advent calendar.
+
+If you still want to see it, you can get your puzzle input.
 
 You can also [Share] this puzzle.
