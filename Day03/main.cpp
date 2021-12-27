@@ -82,7 +82,7 @@ int co2ScrubberRating( const std::vector<int> &input, int bitCount )
 
 int main()
 {
-  std::ifstream    input( R"(D:\Develop\AdventOfCode2021\Day03\input.txt)" );
+  std::ifstream    input( R"(..\Day03\input.txt)" );
   std::string      line;
   std::vector<int> bitsSet;
   std::vector<int> values;

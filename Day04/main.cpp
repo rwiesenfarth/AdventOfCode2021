@@ -93,7 +93,7 @@ struct BingoBoard
 
 int main()
 {
-  std::ifstream           input( R"(D:\Develop\AdventOfCode2021\Day04\input.txt)" );
+  std::ifstream           input( R"(..\Day04\input.txt)" );
   std::string             drawnLine;
   std::vector<int>        drawnValues;
   std::vector<BingoBoard> boards;

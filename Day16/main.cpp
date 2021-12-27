@@ -372,7 +372,7 @@ std::ostream &operator<<( std::ostream &stream, const Packet &packet )
 
 int main()
 {
-  std::ifstream input( R"(D:\Develop\AdventOfCode2021\Day16\input.txt)" );
+  std::ifstream input( R"(..\Day16\input.txt)" );
   std::string   textLine;
 
   std::getline( input, textLine );

@@ -12,7 +12,7 @@ static constexpr int s_days = 256;
 
 int main()
 {
-  std::ifstream       input( R"(D:\Develop\AdventOfCode2021\Day06\input.txt)" );
+  std::ifstream       input( R"(..\Day06\input.txt)" );
   std::string         textLine;
   std::vector<size_t> fishOfAge( s_maxAge + 1, 0 );
 

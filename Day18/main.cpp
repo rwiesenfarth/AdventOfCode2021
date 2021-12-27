@@ -251,7 +251,7 @@ int main()
   //SnailfishNumber number( "[[[[4,3],4],4],[7,[[8,4],9]]]" );
   //number = number.add( SnailfishNumber( "[1,1]" ) );
 
-  std::ifstream input( R"(D:\Develop\AdventOfCode2021\Day18\input.txt)" );
+  std::ifstream input( R"(..\Day18\input.txt)" );
   std::string   textLine;
   std::vector<SnailfishNumber> operands;
 

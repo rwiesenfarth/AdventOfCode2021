@@ -499,7 +499,7 @@ bool addToNetwork( const Scanner &scannerOne, Scanner &scannerTwo,
 
 int main()
 {
-  std::ifstream input( R"(D:\Develop\AdventOfCode2021\Day19\input.txt)" );
+  std::ifstream input( R"(..\Day19\input.txt)" );
   std::string   textLine;
   std::vector<Scanner> scanners;
   Scanner currentScanner;

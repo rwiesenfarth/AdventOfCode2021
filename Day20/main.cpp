@@ -107,7 +107,7 @@ std::ostream &printImage( std::ostream &stream, const std::vector<std::vector<ch
 
 int main()
 {
-  std::ifstream input( R"(D:\Develop\AdventOfCode2021\Day20\input.txt)" );
+  std::ifstream input( R"(..\Day20\input.txt)" );
   std::string   textLine;
   std::vector<std::vector<char>> image;
   std::vector<char> lookupPattern;

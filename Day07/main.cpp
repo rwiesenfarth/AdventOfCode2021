@@ -84,7 +84,7 @@ void checkAllSumupValues( const std::vector<int> crabPositions, int maxPosition 
 
 int main()
 {
-  std::ifstream    input( R"(D:\Develop\AdventOfCode2021\Day07\input.txt)" );
+  std::ifstream    input( R"(..\Day07\input.txt)" );
   std::string      textLine;
   std::vector<int> crabPositions;
   int              maxPosition = 0;

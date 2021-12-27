@@ -57,7 +57,7 @@ struct Connection
 
 int main()
 {
-  std::ifstream                         input( R"(D:\Develop\AdventOfCode2021\Day12\input.txt)" );
+  std::ifstream                         input( R"(..\Day12\input.txt)" );
   std::string                           textLine;
   std::unordered_map<std::string, Cave> caves;
   std::vector<Connection>               connections;

@@ -144,7 +144,7 @@ int decodePattern( const PatternLine &pattern )
 
 int main()
 {
-  std::ifstream            input( R"(D:\Develop\AdventOfCode2021\Day08\input.txt)" );
+  std::ifstream            input( R"(..\Day08\input.txt)" );
   std::string              textLine;
   std::vector<PatternLine> patterns;
 

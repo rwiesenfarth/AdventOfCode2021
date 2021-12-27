@@ -89,7 +89,7 @@ struct Grid
 
 int main()
 {
-  std::ifstream     input( R"(D:\Develop\AdventOfCode2021\Day05\input.txt)" );
+  std::ifstream     input( R"(..\Day05\input.txt)" );
   std::vector<Line> lines;
   std::string       textLine;
   int               xMax = 0;

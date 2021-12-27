@@ -99,7 +99,7 @@ void dumpOctopuses( const std::vector<std::vector<int>> &octopuses )
 
 int main()
 {
-  std::ifstream                 input( R"(D:\Develop\AdventOfCode2021\Day11\input.txt)" );
+  std::ifstream                 input( R"(..\Day11\input.txt)" );
   std::string                   textLine;
   std::vector<std::vector<int>> octopuses;
 

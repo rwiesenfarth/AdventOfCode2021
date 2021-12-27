@@ -93,7 +93,7 @@ std::unordered_map<std::string, std::uint64_t> insertion( const std::unordered_m
 
 int main()
 {
-  std::ifstream                                  input( R"(D:\Develop\AdventOfCode2021\Day14\input.txt)" );
+  std::ifstream                                  input( R"(..\Day14\input.txt)" );
   std::string                                    pattern;
   std::string                                    textLine;
   std::vector<Rule>                              rules;

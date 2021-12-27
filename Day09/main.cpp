@@ -80,7 +80,7 @@ struct Basin
 
 int main()
 {
-  std::ifstream                  input( R"(D:\Develop\AdventOfCode2021\Day09\input.txt)" );
+  std::ifstream                  input( R"(..\Day09\input.txt)" );
   std::string                    textLine;
   std::vector<std::vector<int>>  heights;
   std::vector<std::vector<bool>> isMinimum;

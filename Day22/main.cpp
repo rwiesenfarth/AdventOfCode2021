@@ -143,7 +143,7 @@ std::vector<Cube> Cube::add( const Cube &other ) const
 
 int main()
 {
-  std::ifstream input( R"(D:\Develop\AdventOfCode2021\Day22\input.txt)" );
+  std::ifstream input( R"(..\Day22\input.txt)" );
   std::string   textLine;
   std::vector<Cube> cubes;
   std::vector<Cube> switchingCubes;

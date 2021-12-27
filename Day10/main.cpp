@@ -19,7 +19,7 @@ enum BraceType
 
 int main()
 {
-  std::ifstream              input( R"(D:\Develop\AdventOfCode2021\Day10\input.txt)" );
+  std::ifstream              input( R"(..\Day10\input.txt)" );
   std::string                textLine;
   int                        totalError = 0;
   std::vector<std::uint64_t> completionScores;

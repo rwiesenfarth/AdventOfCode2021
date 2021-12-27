@@ -115,7 +115,7 @@ void printout( const std::unordered_set<Dot> &dots )
 
 int main()
 {
-  std::ifstream                           input( R"(D:\Develop\AdventOfCode2021\Day13\input.txt)" );
+  std::ifstream                           input( R"(..\Day13\input.txt)" );
   std::string                             textLine;
   std::unordered_set<Dot> dots;
 

@@ -66,7 +66,7 @@ std::vector<std::vector<GridPosition>> growGrid( const std::vector<std::vector<G
 
 int main()
 {
-  std::ifstream                          input( R"(D:\Develop\AdventOfCode2021\Day15\input.txt)" );
+  std::ifstream                          input( R"(..\Day15\input.txt)" );
   std::string                            textLine;
   std::vector<std::vector<GridPosition>> grid;
   std::multimap<int, PathPoint>          partialPaths;
